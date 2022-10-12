@@ -7,7 +7,7 @@ const EditModal = ({
   setTodo,
   index,
   defaultValue,
-  editModal,
+  // status,
 }) => {
   const ref = useRef(null);
   const [value, setValue] = useState("");
@@ -22,7 +22,11 @@ const EditModal = ({
       toast.error("Enter a todo");
     } else {
       const newTodo = [...todo];
-      newTodo.splice(index, 1, { value: value });
+      newTodo.splice(index, 1, {
+        value: value,
+        status: "progress",
+        date: new Date().toDateString(),
+      });
       setTodo(newTodo);
       localStorage.setItem("todo", JSON.stringify(newTodo));
       setEditModal(false);
@@ -31,13 +35,11 @@ const EditModal = ({
 
   return (
     <>
-      <div className="fixed bg-[rgba(49,49,49,0.8)] w-full h-screen z-10 inset-0">
-        overlay
-      </div>
+      <div className="fixed bg-[rgba(49,49,49,0.8)] w-full h-screen z-10 inset-0"></div>
 
       <form
         className="animate__animated animate__zoomIn
-    bg-[#ebecf0] w-[30%] px-4 py-10 rounded-md fixed top-[50%] left-[50%] flex flex-col translate-x-[-50%] translate-y-[-50%] z-10 m-auto"
+    bg-[#ebecf0] w-[min(350px,90%)] px-4 py-10 rounded-md fixed top-[50%] left-[50%] flex flex-col translate-x-[-50%] translate-y-[-50%] z-10 m-auto"
       >
         <input
           className="block w-full border-2 border-midnight outline-none mb-3 focus:border-midnight focus:ring-0 focus:ring-offset-0"

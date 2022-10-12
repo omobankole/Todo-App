@@ -1,7 +1,7 @@
 const StatusComponent = ({ status, setStatus }) => {
   return (
     <div className="flex w-full justify-center p-3 mt-2 shadow-normal bg-midnight text-white rounded-md font-poppins">
-      <div className="flex justify-between w-2/4">
+      <div className="flex justify-between w-2/4 sm:w-[90%]">
         <button
           className={`block ${
             status === "" && "text-spring border-2 p-1 rounded-md"

@@ -37,9 +37,14 @@ const Home = () => {
       toast.error("Enter a todo");
     } else {
       const newTodo = [...todo];
-      newTodo.push({ value: value, status: "progress" });
-      setTodo(newTodo);
+      newTodo.unshift({
+        value: value,
+        status: "progress",
+        date: new Date().toDateString(),
+      });
+      console.log(newTodo);
       localStorage.setItem("todo", JSON.stringify(newTodo));
+      setTodo(newTodo);
       setAddModal(false);
     }
   };
@@ -55,14 +60,17 @@ const Home = () => {
     <>
       <div className="w-full relative h-screen bg-image">
         {addModal && (
-          <div className="fixed bg-[rgba(49,49,49,0.8)] z-10 inset-0"></div>
+          <div className="fixed bg-[rgba(49,49,49,0.8)] z-10 inset-0">
+            <Modal handleSubmit={handleSubmit} setAddModal={setAddModal} />
+          </div>
         )}
-        <div className="w-2/5 absolute left-0 right-0 ml-auto mr-auto top-[100px]">
-          <h2 className="block text-[30px] font-poppins">
+
+        <div className="w-[min(550px,94%)] absolute left-0 right-0 ml-auto mr-auto top-[100px]">
+          <h2 className="block text-[30px] font-poppins text-center mb-3">
             <span className="capitalize inline-block">{data.username}</span>'s
             Todo Lists
           </h2>
-          <div className="h-[50vh] flex flex-col justify-between ">
+          <div className="h-[50vh] sm:h-[60vh] flex flex-col justify-between ">
             <div className="flex justify-center">
               <button
                 className="bg-midnight flex justify-center items-center text-white w-[100%] p-1 font-poppins rounded-md"
@@ -71,11 +79,9 @@ const Home = () => {
                 Create a new todo <span className="text-[26px] ml-2">+</span>
               </button>
             </div>
-            {addModal && (
-              <Modal handleSubmit={handleSubmit} setAddModal={setAddModal} />
-            )}
+
             {
-              <div className="h-[70%] overflow-y-auto overflow-x-auto w-full no-scrollbar z-[2]">
+              <div className="h-[70%] flex items-center flex-col overflow-y-auto w-full mx-auto scrollbar-track-[#e0dfdf] scrollbar-thumb-[#9d9494ac] scrollbar-thumb-rounded-full scrollbar-thin">
                 {mappedArray && mappedArray.length > 0 ? (
                   <>
                     {status === "completed" &&

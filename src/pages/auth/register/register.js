@@ -10,12 +10,14 @@ const Register = () => {
     username: "",
     password: "",
   });
+  
   useEffect(() => {
     const details = JSON.parse(data);
     if (details) {
       setRegisterInfo(details);
     }
   }, [data]);
+
   const handleChange = (e) =>
     setPayload((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
@@ -36,7 +38,7 @@ const Register = () => {
         setRegisterInfo(newInfo);
         localStorage.setItem("registerInfo", JSON.stringify(newInfo));
         toast.success(`${payload.username} has been registered 🥳`);
-        navigate("/login");
+        navigate("/");
       }
     }
   };
@@ -68,7 +70,7 @@ const Register = () => {
       </button>
       <div className="flex items-center">
         <p className="text-sm">Already have an account?</p>
-        <a href="/login" className="text-spring text-[12px] ml-1">
+        <a href="/" className="text-spring text-[12px] ml-1">
           Login
         </a>
       </div>

@@ -29,8 +29,8 @@ const Login = () => {
       (item) =>
         item.username === payload.username && item.password === payload.password
     );
-    if (correctInfo) {
-      navigate("/");
+    if (correctInfo) {    
+      navigate("/home");
       toast.success(`welcome ${payload.username}`, { theme: "dark" });
     } else {
       toast.error("invalid username or password");

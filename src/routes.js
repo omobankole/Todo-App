@@ -8,17 +8,17 @@ const Routes = () => {
   return useRoutes([
     {
       path: "/",
+      element: <AuthLayout />,
+      children: [
+        { path: "/", element: <Login /> },
+        { path: "/register", element: <Register /> }
+      ],
+    },
+    {
+      path: "/home",
       element: <Home />,
   
     },
-    {
-      path: "/",
-      element: <AuthLayout />,
-      children: [
-        { path: "/login", element: <Login /> },
-        { path: "/register", element: <Register /> }
-      ],
-    }
   ]);
 };
 
